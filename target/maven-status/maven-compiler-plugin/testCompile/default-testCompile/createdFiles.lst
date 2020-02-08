@@ -1,0 +1,11 @@
+br/com/basis/prova/ProvaApplicationTests.class
+br/com/basis/prova/builder/ConstrutorDeEntidade.class
+br/com/basis/prova/builder/DisciplinaBuilder.class
+br/com/basis/prova/builder/ProfessorBuilder.class
+br/com/basis/prova/recurso/ProfessorRecursoTest.class
+br/com/basis/prova/builder/CustomizacaoEntidade.class
+br/com/basis/prova/recurso/DisciplinaRecursoTest.class
+br/com/basis/prova/recurso/util/TestUtil$ZonedDateTimeMatcher.class
+br/com/basis/prova/recurso/AlunoRecursoTest.class
+br/com/basis/prova/recurso/util/TestUtil.class
+br/com/basis/prova/builder/AlunoBuilder.class
