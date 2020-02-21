@@ -1,9 +1,14 @@
 package br.com.basis.prova.recurso;
 
 
+import br.com.basis.prova.dominio.Aluno;
+import br.com.basis.prova.dominio.Professor;
 import br.com.basis.prova.dominio.dto.ProfessorDTO;
 import br.com.basis.prova.dominio.dto.ProfessorDetalhadoDTO;
+import br.com.basis.prova.repositorio.AlunoRepositorio;
+import br.com.basis.prova.repositorio.ProfessorRepositorio;
 import br.com.basis.prova.servico.ProfessorServico;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/professores")
@@ -48,9 +54,18 @@ public class ProfessorRecurso {
         return ResponseEntity.status(200).build();
     }
 
+    //@GetMapping
+    //public ResponseEntity<List<ProfessorDTO>> consultar() {
+       // return ResponseEntity.ok(professorServico.consultar());
+   // }
+
+    @Autowired
+    private ProfessorRepositorio professorRepositorio;
+
     @GetMapping
-    public ResponseEntity<List<ProfessorDTO>> consultar() {
-        return ResponseEntity.ok(professorServico.consultar());
+    public List<Professor> listar()
+    {
+        return professorRepositorio.findAll();
     }
 
     @GetMapping("/detalhes/{id}")

@@ -6,6 +6,7 @@ import br.com.basis.prova.dominio.dto.AlunoDetalhadoDTO;
 import br.com.basis.prova.repositorio.AlunoRepositorio;
 import br.com.basis.prova.servico.exception.RegraNegocioException;
 import br.com.basis.prova.servico.mapper.AlunoMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +18,8 @@ import java.util.List;
 public class AlunoServico {
 
     private AlunoMapper alunoMapper;
+
+    @Autowired
     private AlunoRepositorio alunoRepositorio;
 
     public AlunoServico(AlunoMapper alunoMapper, AlunoRepositorio alunoRepositorio) {
@@ -43,7 +46,8 @@ public class AlunoServico {
     }
 
     public List<AlunoDTO> consultar() {
-        return new ArrayList<>();
+        List alunos = new ArrayList<AlunoDTO>();
+        return alunos = alunoRepositorio.findAll();
     }
 
     public AlunoDetalhadoDTO detalhar(Integer id) {
