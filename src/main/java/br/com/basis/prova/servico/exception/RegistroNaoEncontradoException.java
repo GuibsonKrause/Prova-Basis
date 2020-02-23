@@ -1,7 +1,9 @@
 package br.com.basis.prova.servico.exception;
 
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
@@ -17,6 +19,5 @@ public class RegistroNaoEncontradoException extends RuntimeException {
     public RegistroNaoEncontradoException(final String message, final Throwable cause) {
         super(message, cause);
     }
-
 
 }

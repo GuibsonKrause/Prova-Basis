@@ -42,7 +42,8 @@ public class AlunoServico {
         return !(alunoCpf == null || alunoCpf.getId().equals(aluno.getId()));
     }
 
-    public void excluir(String matricula) {
+    public void excluir(Integer id) {
+        alunoRepositorio.deleteById(id);
     }
 
     public List<AlunoDTO> consultar() {
