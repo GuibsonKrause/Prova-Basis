@@ -40,9 +40,9 @@ public class AlunoRecurso {
         return ResponseEntity.ok(result);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluir(@PathVariable("id") Integer id) {
-        alunoServico.excluir(id);
+    @DeleteMapping("/{matricula}")
+    public ResponseEntity<Void> excluir(@PathVariable("matricula") String matricula) {
+        alunoServico.excluir(matricula);
         return ResponseEntity.status(200).build();
     }
 

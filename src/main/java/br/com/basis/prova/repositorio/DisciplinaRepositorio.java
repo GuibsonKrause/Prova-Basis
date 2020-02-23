@@ -1,5 +1,6 @@
 package br.com.basis.prova.repositorio;
 
+import br.com.basis.prova.dominio.Aluno;
 import br.com.basis.prova.dominio.Disciplina;
 import br.com.basis.prova.dominio.Professor;
 import org.springframework.data.jpa.repository.JpaRepository;
