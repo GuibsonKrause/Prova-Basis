@@ -42,6 +42,7 @@ public class DisciplinaServico {
     }
 
     public void excluir(Integer id) {
+        disciplinaRepositorio.deleteById(id);
     }
 
     public List<DisciplinaListagemDTO> consultar() {
