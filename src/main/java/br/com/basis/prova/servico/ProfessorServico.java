@@ -1,5 +1,6 @@
 package br.com.basis.prova.servico;
 
+import br.com.basis.prova.dominio.Aluno;
 import br.com.basis.prova.dominio.Disciplina;
 import br.com.basis.prova.dominio.Professor;
 import br.com.basis.prova.dominio.dto.AlunoDTO;
@@ -35,8 +36,10 @@ public class ProfessorServico {
     }
 
     public void excluir(String matricula) {
-        Professor professor = new Professor();
-        List<Disciplina> disciplinas = disciplinaRepositorio.findByProfessor(professor);
+        Professor objProfessor = new Professor();
+
+        objProfessor = professorRepositorio.findByMatricula(matricula);
+        professorRepositorio.delete(objProfessor);
     }
 
     public List<ProfessorDTO> consultar() {
