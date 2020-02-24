@@ -27,21 +27,14 @@ public class Disciplina {
     @Column(name = "DESCRICAO", nullable = false)
     private String descricao;
 
-    @Column(name = "CARGAHORARIA", nullable = false)
+    @Column(name = "CARGA_HORARIA", nullable = false)
     private Integer cargaHoraria;
 
     @Column(name = "ATIVA", nullable = true)
     private Integer ativa;
 
     @ManyToOne
-    @JoinColumn(name="ProfessorFK")
+    @JoinColumn(name="ID_PROFESSOR")
     private Professor professor;
-
-/*
-    @ManyToMany
-    @JoinTable(name = "DISCIPLINA PROFESSOR",
-            joinColumns = @JoinColumn(name = "ID_DISCIPLINA", referencedColumnName = "ID"),
-            inverseJoinColumns= @JoinColumn(name = "ID_PROFESSOR", referencedColumnName = "ID"))
-    private List<Professor> professor = new ArrayList<>();*/
 
 }

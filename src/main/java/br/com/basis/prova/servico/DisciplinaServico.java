@@ -21,6 +21,7 @@ import java.util.List;
 @Transactional
 public class DisciplinaServico {
 
+    @Autowired
     private DisciplinaRepositorio disciplinaRepositorio;
     private DisciplinaMapper disciplinaMapper;
 
