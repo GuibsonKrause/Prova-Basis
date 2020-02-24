@@ -2,6 +2,7 @@ package br.com.basis.prova.servico;
 
 import br.com.basis.prova.dominio.Disciplina;
 import br.com.basis.prova.dominio.Professor;
+import br.com.basis.prova.dominio.dto.AlunoDTO;
 import br.com.basis.prova.dominio.dto.ProfessorDTO;
 import br.com.basis.prova.dominio.dto.ProfessorDetalhadoDTO;
 import br.com.basis.prova.repositorio.DisciplinaRepositorio;
@@ -39,7 +40,8 @@ public class ProfessorServico {
     }
 
     public List<ProfessorDTO> consultar() {
-        return new ArrayList<>();
+        List professores = new ArrayList<ProfessorDTO>();
+        return professores = professorRepositorio.findAll();
     }
 
     public ProfessorDetalhadoDTO detalhar(Integer id) {

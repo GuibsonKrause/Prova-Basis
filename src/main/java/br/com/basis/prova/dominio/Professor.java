@@ -25,9 +25,9 @@ public class Professor {
     @Column(name = "MATRICULA", nullable = false)
     private String matricula;
 
-    @Column(name = "AREA", nullable = true)
+    @Column(name = "AREA_ATUACAO", length = 200, nullable = true)
     private String area;
 
-    @Column(name = "DATANASCIMENTO", nullable = false)
+    @Column(name = "DATA_NASCIMENTO", nullable = false)
     private LocalDate dataNascimento;
 }

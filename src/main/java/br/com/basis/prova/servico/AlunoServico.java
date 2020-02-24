@@ -34,7 +34,11 @@ public class AlunoServico {
             throw new RegraNegocioException("CPF já existe");
         }
 
-        return alunoMapper.toDto(aluno);
+        if(verificarMatricula(aluno)){
+            throw new RegraNegocioException("Matrícula já existe");
+        }
+
+        return alunoMapper.toDto(alunoRepositorio.save(aluno));
     }
 
     private boolean verificarCPF(Aluno aluno) {
@@ -42,10 +46,16 @@ public class AlunoServico {
         return !(alunoCpf == null || alunoCpf.getId().equals(aluno.getId()));
     }
 
+    private boolean verificarMatricula(Aluno aluno) {
+        Aluno alunoMatricula = alunoRepositorio.findByMatricula(aluno.getMatricula());
+        return !(alunoMatricula == null || alunoMatricula.getId().equals(aluno.getId()));
+    }
+
     public void excluir(String matricula) {
         Aluno objAluno = new Aluno();
         objAluno = alunoRepositorio.findByMatricula(matricula);
-        alunoRepositorio.delete(objAluno);
+        //if (objAluno.getDisciplinas().contains())
+            alunoRepositorio.delete(objAluno);
     }
 
     public List<AlunoDTO> consultar() {

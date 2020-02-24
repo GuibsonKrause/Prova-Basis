@@ -3,6 +3,7 @@ package br.com.basis.prova.recurso;
 
 import br.com.basis.prova.dominio.Aluno;
 import br.com.basis.prova.dominio.Professor;
+import br.com.basis.prova.dominio.dto.AlunoDTO;
 import br.com.basis.prova.dominio.dto.ProfessorDTO;
 import br.com.basis.prova.dominio.dto.ProfessorDetalhadoDTO;
 import br.com.basis.prova.repositorio.AlunoRepositorio;
@@ -54,18 +55,9 @@ public class ProfessorRecurso {
         return ResponseEntity.status(200).build();
     }
 
-    //@GetMapping
-    //public ResponseEntity<List<ProfessorDTO>> consultar() {
-       // return ResponseEntity.ok(professorServico.consultar());
-   // }
-
-    @Autowired
-    private ProfessorRepositorio professorRepositorio;
-
     @GetMapping
-    public List<Professor> listar()
-    {
-        return professorRepositorio.findAll();
+    public ResponseEntity<List<ProfessorDTO>> consultar() {
+        return ResponseEntity.ok(professorServico.consultar());
     }
 
     @GetMapping("/detalhes/{id}")
