@@ -35,9 +35,10 @@ public class AlunoRecurso {
         return ResponseEntity.created(new URI(API_ALUNOS + result.getId())).body(result);
     }
 
-    @PutMapping
-    public ResponseEntity<AlunoDTO> editar(@RequestBody AlunoDTO alunoDTO) throws URISyntaxException {
-        AlunoDTO result = alunoServico.salvar(alunoDTO);
+    @PutMapping("/{id}")
+    public ResponseEntity<AlunoDTO> editar(@PathVariable("id") Integer id, @RequestBody AlunoDTO alunoDTO)
+            throws URISyntaxException {
+        AlunoDTO result = alunoServico.atualizar(id, alunoDTO);
         return ResponseEntity.ok(result);
     }
 

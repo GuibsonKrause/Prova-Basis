@@ -9,6 +9,7 @@ import br.com.basis.prova.servico.exception.RegraNegocioException;
 import br.com.basis.prova.servico.mapper.AlunoListagemMapper;
 import br.com.basis.prova.servico.mapper.AlunoMapper;
 import br.com.basis.prova.servico.mapper.DisciplinaListagemMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,6 +46,13 @@ public class AlunoServico {
         }
 
         return alunoMapper.toDto(alunoRepositorio.save(aluno));
+    }
+
+    public AlunoDTO atualizar(int id, AlunoDTO aluno) {
+        Aluno alunoSalvo = alunoRepositorio.findById(id).orElseThrow(()
+                -> new RegraNegocioException("Registro não encontrado"));
+        BeanUtils.copyProperties(aluno, alunoSalvo, "id");
+        return alunoMapper.toDto(alunoRepositorio.save(alunoSalvo));
     }
 
     private boolean verificarCPF(Aluno aluno) {
