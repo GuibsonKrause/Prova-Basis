@@ -7,7 +7,6 @@ import br.com.basis.prova.dominio.dto.AlunoListagemDTO;
 import br.com.basis.prova.repositorio.AlunoRepositorio;
 import br.com.basis.prova.servico.AlunoServico;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
