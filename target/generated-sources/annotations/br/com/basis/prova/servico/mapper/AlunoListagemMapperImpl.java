@@ -1,11 +1,10 @@
 package br.com.basis.prova.servico.mapper;
 
 import br.com.basis.prova.dominio.Aluno;
-import br.com.basis.prova.dominio.dto.AlunoDTO;
+import br.com.basis.prova.dominio.dto.AlunoListagemDTO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Generated(
@@ -14,13 +13,10 @@ import org.springframework.stereotype.Component;
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_232 (Oracle Corporation)"
 )
 @Component
-public class AlunoMapperImpl implements AlunoMapper {
-
-    @Autowired
-    private DisciplinaMapper disciplinaMapper;
+public class AlunoListagemMapperImpl implements AlunoListagemMapper {
 
     @Override
-    public Aluno toEntity(AlunoDTO dto) {
+    public Aluno toEntity(AlunoListagemDTO dto) {
         if ( dto == null ) {
             return null;
         }
@@ -29,53 +25,49 @@ public class AlunoMapperImpl implements AlunoMapper {
 
         aluno.setId( dto.getId() );
         aluno.setMatricula( dto.getMatricula() );
-        aluno.setCpf( dto.getCpf() );
         aluno.setNome( dto.getNome() );
         aluno.setDataNascimento( dto.getDataNascimento() );
-        aluno.setDisciplinas( disciplinaMapper.toEntity( dto.getDisciplinas() ) );
 
         return aluno;
     }
 
     @Override
-    public AlunoDTO toDto(Aluno entity) {
+    public AlunoListagemDTO toDto(Aluno entity) {
         if ( entity == null ) {
             return null;
         }
 
-        AlunoDTO alunoDTO = new AlunoDTO();
+        AlunoListagemDTO alunoListagemDTO = new AlunoListagemDTO();
 
-        alunoDTO.setId( entity.getId() );
-        alunoDTO.setNome( entity.getNome() );
-        alunoDTO.setCpf( entity.getCpf() );
-        alunoDTO.setMatricula( entity.getMatricula() );
-        alunoDTO.setDataNascimento( entity.getDataNascimento() );
-        alunoDTO.setDisciplinas( disciplinaMapper.toDto( entity.getDisciplinas() ) );
+        alunoListagemDTO.setId( entity.getId() );
+        alunoListagemDTO.setNome( entity.getNome() );
+        alunoListagemDTO.setMatricula( entity.getMatricula() );
+        alunoListagemDTO.setDataNascimento( entity.getDataNascimento() );
 
-        return alunoDTO;
+        return alunoListagemDTO;
     }
 
     @Override
-    public List<Aluno> toEntity(List<AlunoDTO> dtoList) {
+    public List<Aluno> toEntity(List<AlunoListagemDTO> dtoList) {
         if ( dtoList == null ) {
             return null;
         }
 
         List<Aluno> list = new ArrayList<Aluno>( dtoList.size() );
-        for ( AlunoDTO alunoDTO : dtoList ) {
-            list.add( toEntity( alunoDTO ) );
+        for ( AlunoListagemDTO alunoListagemDTO : dtoList ) {
+            list.add( toEntity( alunoListagemDTO ) );
         }
 
         return list;
     }
 
     @Override
-    public List<AlunoDTO> toDto(List<Aluno> entityList) {
+    public List<AlunoListagemDTO> toDto(List<Aluno> entityList) {
         if ( entityList == null ) {
             return null;
         }
 
-        List<AlunoDTO> list = new ArrayList<AlunoDTO>( entityList.size() );
+        List<AlunoListagemDTO> list = new ArrayList<AlunoListagemDTO>( entityList.size() );
         for ( Aluno aluno : entityList ) {
             list.add( toDto( aluno ) );
         }

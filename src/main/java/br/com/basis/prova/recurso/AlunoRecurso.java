@@ -3,6 +3,7 @@ package br.com.basis.prova.recurso;
 import br.com.basis.prova.dominio.Aluno;
 import br.com.basis.prova.dominio.dto.AlunoDTO;
 import br.com.basis.prova.dominio.dto.AlunoDetalhadoDTO;
+import br.com.basis.prova.dominio.dto.AlunoListagemDTO;
 import br.com.basis.prova.repositorio.AlunoRepositorio;
 import br.com.basis.prova.servico.AlunoServico;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,7 @@ public class AlunoRecurso {
     }
 
     @GetMapping
-    public ResponseEntity<List<AlunoDTO>> consultar() {
+    public ResponseEntity<List<AlunoListagemDTO>> consultar() {
         return ResponseEntity.ok(alunoServico.consultar());
     }
 

@@ -6,8 +6,10 @@ import br.com.basis.prova.dominio.Professor;
 import br.com.basis.prova.dominio.dto.AlunoDTO;
 import br.com.basis.prova.dominio.dto.ProfessorDTO;
 import br.com.basis.prova.dominio.dto.ProfessorDetalhadoDTO;
+import br.com.basis.prova.dominio.dto.ProfessorListagemDTO;
 import br.com.basis.prova.repositorio.DisciplinaRepositorio;
 import br.com.basis.prova.repositorio.ProfessorRepositorio;
+import br.com.basis.prova.servico.mapper.ProfessorListagemMapper;
 import br.com.basis.prova.servico.mapper.ProfessorMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,11 +22,15 @@ import java.util.List;
 @Transactional
 public class ProfessorServico {
 
+    @Autowired
     private ProfessorRepositorio professorRepositorio;
     private ProfessorMapper professorMapper;
 
     @Autowired
     private DisciplinaRepositorio disciplinaRepositorio;
+
+    @Autowired
+    private ProfessorListagemMapper professorListagemMapper;
 
     public ProfessorServico(ProfessorMapper professorMapper, ProfessorRepositorio professorRepositorio) {
         this.professorMapper = professorMapper;
@@ -42,9 +48,8 @@ public class ProfessorServico {
         professorRepositorio.delete(objProfessor);
     }
 
-    public List<ProfessorDTO> consultar() {
-        List professores = new ArrayList<ProfessorDTO>();
-        return professores = professorRepositorio.findAll();
+    public List<ProfessorListagemDTO> consultar() {
+        return professorListagemMapper.toDto(professorRepositorio.findAll());
     }
 
     public ProfessorDetalhadoDTO detalhar(Integer id) {

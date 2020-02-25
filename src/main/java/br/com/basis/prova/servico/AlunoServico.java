@@ -3,9 +3,12 @@ package br.com.basis.prova.servico;
 import br.com.basis.prova.dominio.Aluno;
 import br.com.basis.prova.dominio.dto.AlunoDTO;
 import br.com.basis.prova.dominio.dto.AlunoDetalhadoDTO;
+import br.com.basis.prova.dominio.dto.AlunoListagemDTO;
 import br.com.basis.prova.repositorio.AlunoRepositorio;
 import br.com.basis.prova.servico.exception.RegraNegocioException;
+import br.com.basis.prova.servico.mapper.AlunoListagemMapper;
 import br.com.basis.prova.servico.mapper.AlunoMapper;
+import br.com.basis.prova.servico.mapper.DisciplinaListagemMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +24,9 @@ public class AlunoServico {
 
     @Autowired
     private AlunoRepositorio alunoRepositorio;
+
+    @Autowired
+    private AlunoListagemMapper alunoListagemMapper;
 
     public AlunoServico(AlunoMapper alunoMapper, AlunoRepositorio alunoRepositorio) {
         this.alunoMapper = alunoMapper;
@@ -58,9 +64,8 @@ public class AlunoServico {
             alunoRepositorio.delete(objAluno);
     }
 
-    public List<AlunoDTO> consultar() {
-        List alunos = new ArrayList<AlunoDTO>();
-        return alunos = alunoRepositorio.findAll();
+    public List<AlunoListagemDTO> consultar() {
+        return alunoListagemMapper.toDto(alunoRepositorio.findAll());
     }
 
     public AlunoDetalhadoDTO detalhar(Integer id) {
