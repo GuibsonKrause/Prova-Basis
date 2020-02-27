@@ -44,13 +44,13 @@ public class Aluno {
 
     @Column(name = "DATA_NASCIMENTO", nullable = false)
     private LocalDate dataNascimento;
-
     @ManyToMany
+    @JsonIgnore
     @JoinTable(name = "ALUNO_DISCIPLINA",
             joinColumns = @JoinColumn(name = "ID_ALUNO", referencedColumnName = "ID"),
             inverseJoinColumns= @JoinColumn(name = "ID_DISCIPLINA", referencedColumnName = "ID"))
-    @JsonIgnore
-    private List<Disciplina> disciplinas = new ArrayList<>();
+    private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
+
 
     @Override
     public boolean equals(Object o) {

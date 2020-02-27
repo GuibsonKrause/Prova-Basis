@@ -18,6 +18,6 @@ public class AlunoDTO { // DTO usado para salvar e editar um aluno
     private String cpf;
     private String matricula;
     private LocalDate dataNascimento;
-    private List<DisciplinaDTO> disciplinas = new ArrayList<>();
+    private List<DisciplinaDTO> disciplinas = new ArrayList<DisciplinaDTO>();
 
 }
