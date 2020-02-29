@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-02-24T18:41:15-0300",
-    comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_232 (Oracle Corporation)"
+    date = "2020-02-28T00:03:15-0300",
+    comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_241 (Oracle Corporation)"
 )
 @Component
 public class DisciplinaMapperImpl implements DisciplinaMapper {
@@ -24,6 +24,11 @@ public class DisciplinaMapperImpl implements DisciplinaMapper {
         Disciplina disciplina = new Disciplina();
 
         disciplina.setId( dto.getId() );
+        disciplina.setNome( dto.getNome() );
+        disciplina.setDescricao( dto.getDescricao() );
+        disciplina.setCargaHoraria( dto.getCargaHoraria() );
+        disciplina.setAtiva( dto.getAtiva() );
+        disciplina.setProfessor( dto.getProfessor() );
 
         return disciplina;
     }
@@ -37,6 +42,11 @@ public class DisciplinaMapperImpl implements DisciplinaMapper {
         DisciplinaDTO disciplinaDTO = new DisciplinaDTO();
 
         disciplinaDTO.setId( entity.getId() );
+        disciplinaDTO.setNome( entity.getNome() );
+        disciplinaDTO.setDescricao( entity.getDescricao() );
+        disciplinaDTO.setCargaHoraria( entity.getCargaHoraria() );
+        disciplinaDTO.setAtiva( entity.getAtiva() );
+        disciplinaDTO.setProfessor( entity.getProfessor() );
 
         return disciplinaDTO;
     }

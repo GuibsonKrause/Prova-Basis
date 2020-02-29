@@ -9,6 +9,7 @@ import br.com.basis.prova.dominio.dto.ProfessorDetalhadoDTO;
 import br.com.basis.prova.dominio.dto.ProfessorListagemDTO;
 import br.com.basis.prova.repositorio.DisciplinaRepositorio;
 import br.com.basis.prova.repositorio.ProfessorRepositorio;
+import br.com.basis.prova.servico.exception.RegraNegocioException;
 import br.com.basis.prova.servico.mapper.ProfessorListagemMapper;
 import br.com.basis.prova.servico.mapper.ProfessorMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,12 @@ public class ProfessorServico {
     }
 
     public ProfessorDTO salvar(ProfessorDTO professorDTO) {
-        return null;
+        Professor professor = professorMapper.toEntity(professorDTO);
+
+        if (verificarMatricula(professor))
+            throw new RegraNegocioException("Matrícula já existe");
+
+        return professorMapper.toDto(professorRepositorio.save(professor));
     }
 
     public void excluir(String matricula) {
@@ -54,6 +60,11 @@ public class ProfessorServico {
 
     public ProfessorDetalhadoDTO detalhar(Integer id) {
         return new ProfessorDetalhadoDTO();
+    }
+
+    private boolean verificarMatricula(Professor professor) {
+        Professor professorMatricula = professorRepositorio.findByMatricula(professor.getMatricula());
+        return !(professorMatricula == null || professorMatricula.getId().equals(professor.getId()));
     }
 
 }

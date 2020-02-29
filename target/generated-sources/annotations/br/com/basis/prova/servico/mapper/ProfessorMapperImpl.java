@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-02-24T18:41:15-0300",
-    comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_232 (Oracle Corporation)"
+    date = "2020-02-28T00:03:15-0300",
+    comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_241 (Oracle Corporation)"
 )
 @Component
 public class ProfessorMapperImpl implements ProfessorMapper {
@@ -24,6 +24,10 @@ public class ProfessorMapperImpl implements ProfessorMapper {
         Professor professor = new Professor();
 
         professor.setId( dto.getId() );
+        professor.setNome( dto.getNome() );
+        professor.setMatricula( dto.getMatricula() );
+        professor.setArea( dto.getArea() );
+        professor.setDataNascimento( dto.getDataNascimento() );
 
         return professor;
     }
@@ -37,6 +41,10 @@ public class ProfessorMapperImpl implements ProfessorMapper {
         ProfessorDTO professorDTO = new ProfessorDTO();
 
         professorDTO.setId( entity.getId() );
+        professorDTO.setNome( entity.getNome() );
+        professorDTO.setMatricula( entity.getMatricula() );
+        professorDTO.setArea( entity.getArea() );
+        professorDTO.setDataNascimento( entity.getDataNascimento() );
 
         return professorDTO;
     }
