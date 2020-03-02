@@ -37,8 +37,12 @@ public class DisciplinaServico {
     }
 
     public DisciplinaDTO salvar(DisciplinaDTO disciplinaDTO) {
-        Disciplina disciplina = new Disciplina();
-        return null;
+        Disciplina disciplina = disciplinaMapper.toEntity(disciplinaDTO);
+
+        if(verificarNome(disciplina))
+            throw new RegraNegocioException("Este nome já existe!");
+
+        return disciplinaMapper.toDto(disciplinaRepositorio.save(disciplina));
     }
 
     public void excluir(Integer id) {
@@ -51,6 +55,11 @@ public class DisciplinaServico {
 
     public DisciplinaDetalhadaDTO detalhar(Integer id) {
         return new DisciplinaDetalhadaDTO();
+    }
+
+    private boolean verificarNome(Disciplina disciplina) {
+        Disciplina disciplinaNome = disciplinaRepositorio.findByNome(disciplina.getNome());
+        return !(disciplinaNome == null || disciplinaNome.getId().equals(disciplina.getId()));
     }
 
 }

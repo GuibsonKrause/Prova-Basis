@@ -13,5 +13,6 @@ import java.util.List;
 public interface DisciplinaRepositorio extends JpaRepository<Disciplina, Integer>, JpaSpecificationExecutor<Disciplina> {
 
     List<Disciplina> findByProfessor(Professor professor);
+    Disciplina findByNome(String nome);
 
 }

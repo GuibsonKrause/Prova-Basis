@@ -6,6 +6,7 @@ import br.com.basis.prova.dominio.dto.AlunoDetalhadoDTO;
 import br.com.basis.prova.dominio.dto.AlunoListagemDTO;
 import br.com.basis.prova.repositorio.AlunoRepositorio;
 import br.com.basis.prova.servico.exception.RegraNegocioException;
+import br.com.basis.prova.servico.mapper.AlunoDetalhadoMapper;
 import br.com.basis.prova.servico.mapper.AlunoListagemMapper;
 import br.com.basis.prova.servico.mapper.AlunoMapper;
 import br.com.basis.prova.servico.mapper.DisciplinaListagemMapper;
@@ -28,6 +29,9 @@ public class AlunoServico {
 
     @Autowired
     private AlunoListagemMapper alunoListagemMapper;
+
+    @Autowired
+    private AlunoDetalhadoMapper alunoDetalhadoMapper;
 
     public AlunoServico(AlunoMapper alunoMapper, AlunoRepositorio alunoRepositorio) {
         this.alunoMapper = alunoMapper;
@@ -78,7 +82,7 @@ public class AlunoServico {
 
     public AlunoDetalhadoDTO detalhar(Integer id) {
         Aluno aluno = alunoRepositorio.findById(id).orElseThrow(() -> new RegraNegocioException("Registro não encontrado"));
-        return new AlunoDetalhadoDTO();
+        return alunoDetalhadoMapper.toDto(aluno);
     }
 
 }
