@@ -8,6 +8,7 @@ import br.com.basis.prova.dominio.dto.DisciplinaListagemDTO;
 import br.com.basis.prova.repositorio.DisciplinaRepositorio;
 import br.com.basis.prova.repositorio.ProfessorRepositorio;
 import br.com.basis.prova.servico.exception.RegraNegocioException;
+import br.com.basis.prova.servico.mapper.DisciplinaDetalhadaMapper;
 import br.com.basis.prova.servico.mapper.DisciplinaListagemMapper;
 import br.com.basis.prova.servico.mapper.DisciplinaMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class DisciplinaServico {
 
     @Autowired
     private ProfessorRepositorio professorRepositorio;
+
+    @Autowired
+    private DisciplinaDetalhadaMapper disciplinaDetalhadaMapper;
 
     public DisciplinaServico(DisciplinaMapper disciplinaMapper, DisciplinaRepositorio disciplinaRepositorio) {
         this.disciplinaMapper = disciplinaMapper;
@@ -54,7 +58,8 @@ public class DisciplinaServico {
     }
 
     public DisciplinaDetalhadaDTO detalhar(Integer id) {
-        return new DisciplinaDetalhadaDTO();
+        Disciplina disciplina = disciplinaRepositorio.findById(id).orElseThrow(() -> new RegraNegocioException("Registro não encontrado"));
+        return disciplinaDetalhadaMapper.toDto(disciplina);
     }
 
     private boolean verificarNome(Disciplina disciplina) {

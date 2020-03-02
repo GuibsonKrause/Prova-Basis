@@ -13,6 +13,6 @@ import java.util.List;
 public class DisciplinaDetalhadaDTO {
     private Integer id;
     private String nome;
-    private String matricula;
-    private List<DisciplinaListagemDTO> disciplinas = new ArrayList<>();
+    private Integer cargaHoraria;
+    private ProfessorDTO professor = new ProfessorDTO();
 }

@@ -1,7 +1,9 @@
 package br.com.basis.prova.servico.mapper;
 
 import br.com.basis.prova.dominio.Disciplina;
+import br.com.basis.prova.dominio.Professor;
 import br.com.basis.prova.dominio.dto.DisciplinaDetalhadaDTO;
+import br.com.basis.prova.dominio.dto.ProfessorDTO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
@@ -9,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-03-01T23:33:48-0300",
+    date = "2020-03-01T23:59:30-0300",
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_241 (Oracle Corporation)"
 )
 @Component
@@ -25,6 +27,8 @@ public class DisciplinaDetalhadaMapperImpl implements DisciplinaDetalhadaMapper 
 
         disciplina.setId( dto.getId() );
         disciplina.setNome( dto.getNome() );
+        disciplina.setCargaHoraria( dto.getCargaHoraria() );
+        disciplina.setProfessor( professorDTOToProfessor( dto.getProfessor() ) );
 
         return disciplina;
     }
@@ -39,6 +43,8 @@ public class DisciplinaDetalhadaMapperImpl implements DisciplinaDetalhadaMapper 
 
         disciplinaDetalhadaDTO.setId( entity.getId() );
         disciplinaDetalhadaDTO.setNome( entity.getNome() );
+        disciplinaDetalhadaDTO.setCargaHoraria( entity.getCargaHoraria() );
+        disciplinaDetalhadaDTO.setProfessor( professorToProfessorDTO( entity.getProfessor() ) );
 
         return disciplinaDetalhadaDTO;
     }
@@ -69,5 +75,37 @@ public class DisciplinaDetalhadaMapperImpl implements DisciplinaDetalhadaMapper 
         }
 
         return list;
+    }
+
+    protected Professor professorDTOToProfessor(ProfessorDTO professorDTO) {
+        if ( professorDTO == null ) {
+            return null;
+        }
+
+        Professor professor = new Professor();
+
+        professor.setId( professorDTO.getId() );
+        professor.setNome( professorDTO.getNome() );
+        professor.setMatricula( professorDTO.getMatricula() );
+        professor.setArea( professorDTO.getArea() );
+        professor.setDataNascimento( professorDTO.getDataNascimento() );
+
+        return professor;
+    }
+
+    protected ProfessorDTO professorToProfessorDTO(Professor professor) {
+        if ( professor == null ) {
+            return null;
+        }
+
+        ProfessorDTO professorDTO = new ProfessorDTO();
+
+        professorDTO.setId( professor.getId() );
+        professorDTO.setNome( professor.getNome() );
+        professorDTO.setMatricula( professor.getMatricula() );
+        professorDTO.setArea( professor.getArea() );
+        professorDTO.setDataNascimento( professor.getDataNascimento() );
+
+        return professorDTO;
     }
 }

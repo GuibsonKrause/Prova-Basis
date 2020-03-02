@@ -34,7 +34,7 @@ public class Disciplina {
     private Integer ativa;
 
     @ManyToOne
-    @JoinColumn(name="ID_PROFESSOR")
-    private Professor professor;
+    @JoinColumn(name="ID_PROFESSOR", nullable = false, insertable = true, updatable = true)
+    private Professor professor = new Professor();
 
 }
