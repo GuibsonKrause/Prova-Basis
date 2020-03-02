@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "PROFESSOR")
@@ -30,4 +32,7 @@ public class Professor {
 
     @Column(name = "DATA_NASCIMENTO", nullable = false)
     private LocalDate dataNascimento;
+
+    //@OneToMany(mappedBy = "professor", fetch = FetchType.LAZY)
+    //private List<Disciplina> disciplinas;
 }

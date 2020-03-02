@@ -65,15 +65,15 @@ public class AlunoServico {
     }
 
     private boolean verificarMatricula(Aluno aluno) {
-        Aluno alunoMatricula = alunoRepositorio.findByMatricula(aluno.getMatricula());
+        Aluno alunoMatricula = alunoRepositorio.findByMatricula(aluno.getMatricula()).orElse(null);
         return !(alunoMatricula == null || alunoMatricula.getId().equals(aluno.getId()));
     }
 
     public void excluir(String matricula) {
-        Aluno objAluno = new Aluno();
-        objAluno = alunoRepositorio.findByMatricula(matricula);
-        //if (objAluno.getDisciplinas().contains())
-            alunoRepositorio.delete(objAluno);
+        Aluno aluno = alunoRepositorio.findByMatricula(matricula).orElseThrow(() -> new RegraNegocioException("Registro não encontrado"));
+        if(aluno.getDisciplinas().size() > 0)
+            throw new RegraNegocioException("Este aluno não pode ser excluido pois está matrículado em uma disciplina");
+            alunoRepositorio.delete(aluno);
     }
 
     public List<AlunoListagemDTO> consultar() {

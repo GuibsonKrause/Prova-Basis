@@ -14,7 +14,7 @@ public interface AlunoRepositorio extends JpaRepository<Aluno, Integer>, JpaSpec
 
     Aluno findByCpf(String cpf);
 
-    Aluno findByMatricula(String matricula);
+    Optional<Aluno> findByMatricula(String matricula);
 
     List<Aluno> findAllByDisciplinas(Disciplina disciplina);
 }

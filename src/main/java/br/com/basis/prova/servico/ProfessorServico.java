@@ -10,6 +10,7 @@ import br.com.basis.prova.dominio.dto.ProfessorListagemDTO;
 import br.com.basis.prova.repositorio.DisciplinaRepositorio;
 import br.com.basis.prova.repositorio.ProfessorRepositorio;
 import br.com.basis.prova.servico.exception.RegraNegocioException;
+import br.com.basis.prova.servico.mapper.ProfessorDetalhadoMapper;
 import br.com.basis.prova.servico.mapper.ProfessorListagemMapper;
 import br.com.basis.prova.servico.mapper.ProfessorMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,8 @@ public class ProfessorServico {
     @Autowired
     private ProfessorListagemMapper professorListagemMapper;
 
+    private ProfessorDetalhadoMapper professorDetalhadoMapper;
+
     public ProfessorServico(ProfessorMapper professorMapper, ProfessorRepositorio professorRepositorio) {
         this.professorMapper = professorMapper;
         this.professorRepositorio = professorRepositorio;
@@ -48,10 +51,11 @@ public class ProfessorServico {
     }
 
     public void excluir(String matricula) {
-        Professor objProfessor = new Professor();
-
-        objProfessor = professorRepositorio.findByMatricula(matricula);
-        professorRepositorio.delete(objProfessor);
+        Professor professor = professorRepositorio.findByMatricula(matricula).orElseThrow(() -> new RegraNegocioException("Registro não encontrado"));
+        List<Disciplina> disciplinas = disciplinaRepositorio.findByProfessor(professor);
+        if(disciplinas.size() > 0)
+            throw new RegraNegocioException("Este professor não pode ser excluido pois é responsável por uma ou mais disciplinas");
+        professorRepositorio.delete(professor);
     }
 
     public List<ProfessorListagemDTO> consultar() {
@@ -59,11 +63,15 @@ public class ProfessorServico {
     }
 
     public ProfessorDetalhadoDTO detalhar(Integer id) {
-        return new ProfessorDetalhadoDTO();
+        Professor professor = professorRepositorio.findById(id).orElseThrow(() -> new RegraNegocioException("Registro não encontrado"));
+        //ProfessorDetalhadoDTO professorDetalhadoDTO = new ProfessorDetalhadoDTO();
+       // professorDetalhadoDTO = professorDetalhadoMapper.toDto(professor);
+        //professorDetalhadoDTO.setDisciplinas(disciplinaRepositorio.findByProfessor(id));
+        return professorDetalhadoMapper.toDto(professor);
     }
 
     private boolean verificarMatricula(Professor professor) {
-        Professor professorMatricula = professorRepositorio.findByMatricula(professor.getMatricula());
+        Professor professorMatricula = professorRepositorio.findByMatricula(professor.getMatricula()).orElse(null);
         return !(professorMatricula == null || professorMatricula.getId().equals(professor.getId()));
     }
 

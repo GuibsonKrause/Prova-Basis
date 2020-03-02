@@ -10,5 +10,5 @@ import java.util.Optional;
 
 @Repository
 public interface ProfessorRepositorio extends JpaRepository<Professor, Integer>, JpaSpecificationExecutor<Professor> {
-    Professor findByMatricula(String matricula);
+    Optional<Professor> findByMatricula(String matricula);
 }

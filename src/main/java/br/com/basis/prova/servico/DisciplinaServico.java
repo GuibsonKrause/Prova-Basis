@@ -1,10 +1,12 @@
 package br.com.basis.prova.servico;
 
+import br.com.basis.prova.dominio.Aluno;
 import br.com.basis.prova.dominio.Disciplina;
 import br.com.basis.prova.dominio.Professor;
 import br.com.basis.prova.dominio.dto.DisciplinaDTO;
 import br.com.basis.prova.dominio.dto.DisciplinaDetalhadaDTO;
 import br.com.basis.prova.dominio.dto.DisciplinaListagemDTO;
+import br.com.basis.prova.repositorio.AlunoRepositorio;
 import br.com.basis.prova.repositorio.DisciplinaRepositorio;
 import br.com.basis.prova.repositorio.ProfessorRepositorio;
 import br.com.basis.prova.servico.exception.RegraNegocioException;
@@ -30,7 +32,7 @@ public class DisciplinaServico {
     private DisciplinaListagemMapper disciplinaListagemMapper;
 
     @Autowired
-    private ProfessorRepositorio professorRepositorio;
+    private AlunoRepositorio alunoRepositorio;
 
     @Autowired
     private DisciplinaDetalhadaMapper disciplinaDetalhadaMapper;
@@ -50,6 +52,10 @@ public class DisciplinaServico {
     }
 
     public void excluir(Integer id) {
+        Disciplina disciplina = disciplinaRepositorio.findById(id).orElseThrow(() -> new RegraNegocioException("Registro não encontrado"));
+        List<Aluno> alunos = alunoRepositorio.findAllByDisciplinas(disciplina);
+        if(alunos.size() > 0)
+            throw new RegraNegocioException("Esta disciplina não pode ser excluida pois contém alunos");
         disciplinaRepositorio.deleteById(id);
     }
 
